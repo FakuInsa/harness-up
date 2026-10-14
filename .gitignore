@@ -1,0 +1,72 @@
+# ==========================================
+# Compilaciones y Binarios de Go
+# ==========================================
+/bin/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# ==========================================
+# Salidas de Tests y Cobertura
+# ==========================================
+*.out
+*.test
+coverage.txt
+
+# ==========================================
+# Documentos de Configuración de Harness
+# ==========================================
+# Archivos de configuración y manifiestos de arnés
+harness.yaml
+harness.yml
+harnessup.yaml
+harnessup.yml
+*.harness.yaml
+*.harness.yml
+harness.local.*
+harnessup.local.*
+
+# Base de datos local y memoria SQLite del arnés
+.harness/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# ==========================================
+# Directrices y Reglas Generadas (Runtime / Tests)
+# ==========================================
+# Ignorar reglas y configuraciones de agentes generadas en pruebas locales
+.cursor/
+.claude/
+.windsurfrules
+.opencode/
+CLAUDE.local.md
+
+# Preservar el arnés de gobernanza propio de este repositorio (Dogfooding)
+!.agent/rules/sdd-governance.md
+
+# ==========================================
+# Skills Generadas y Locales
+# ==========================================
+skills/local/
+*.skill.local.md
+skills/generated/
+
+# ==========================================
+# IDEs y Editores
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ==========================================
+# Sistema Operativo
+# ==========================================
+.DS_Store
+Thumbs.db
