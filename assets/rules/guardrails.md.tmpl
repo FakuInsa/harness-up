@@ -1,0 +1,17 @@
+# Guardarraíles de Seguridad y Calidad — {{.Project.Name}}
+
+## 1. Límites de Tamaño por Tarea
+- Ninguna unidad de trabajo puede superar un diff de **{{.Guardrails.MaxDiffLines}}** líneas de código productivo.
+
+{{if .Guardrails.BlockDestructiveCommands}}
+## 2. Comandos Prohibidos
+- Se prohíbe terminantemente la ejecución silenciosa de comandos destructivos (`rm -rf`, `git reset --hard`, `DROP DATABASE`).
+- Todo comando potencialmente destructivo debe contar con aprobación explícita del Tech Lead.
+{{end}}
+
+{{if .Guardrails.ProtectedPaths}}
+## 3. Rutas Protegidas
+Las siguientes rutas y archivos no deben ser alterados sin autorización expresa:
+{{range .Guardrails.ProtectedPaths}}- `{{.}}`
+{{end}}
+{{end}}

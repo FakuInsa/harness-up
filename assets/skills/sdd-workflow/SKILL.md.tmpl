@@ -1,0 +1,14 @@
+---
+name: sdd-workflow
+description: Flujo de trabajo Spec-Driven Development (SDD) para {{.Project.Name}}
+---
+
+# SDD Workflow — {{.Project.Name}}
+
+1. **Fase 1: SPEC** -> Redactar o actualizar especificación técnica detallada en `docs/specs/`.
+2. **Fase 2: GATE** -> Detenerse y pedir aprobación explícita al Tech Lead. Prohibido tocar código sin este OK.
+3. **Fase 3: RED** -> Escribir tests unitarios y certificar que fallen.
+4. **Fase 4: GREEN** -> Escribir implementación mínima necesaria para pasar las pruebas.
+5. **Fase 5: EVIDENCE** -> Certificar cobertura, diff < 300 líneas y registrar el recibo.
+6. **Commits Atómicos (ADR-005)** -> Prohibido commitear transiciones aisladas de metadatos o estados. Máximo 2 commits por feature (spec e implementación completa).
+

@@ -1,0 +1,27 @@
+# Reglas de Arquitectura — {{.Project.Name}}
+
+* **Patrón Principal:** {{.Architecture.Pattern}}
+* **Fronteras Estrictas:** {{if .Architecture.StrictBoundaries}}Activadas{{else}}Desactivadas{{end}}
+
+{{if eq .Architecture.Pattern "vertical-slice"}}
+## Directivas de Vertical Slice Architecture
+- Cada funcionalidad debe encapsularse en su propia feature vertical autónoma.
+- Prohibido crear capas transversales de servicios o repositorios genéricos.
+- Cada slice contiene su propio Command/Query, DTO, lógica de negocio y pruebas asociadas.
+{{else if eq .Architecture.Pattern "clean"}}
+## Directivas de Clean Architecture
+- Respetar la regla de dependencia concéntrica: Domain -> Application -> Infrastructure -> Presentation.
+- El Dominio no debe tener dependencias de frameworks ni de infraestructura externa.
+{{else if eq .Architecture.Pattern "hexagonal"}}
+## Directivas de Arquitectura Hexagonal (Ports & Adapters)
+- El núcleo de negocio se aísla mediante Puertos (interfaces).
+- Los Adaptadores implementan los puertos para infraestructura externa (DB, HTTP, Colas).
+{{else}}
+## Directivas de Arquitectura ({{.Architecture.Pattern}})
+- Mantener alta cohesión y bajo acoplamiento respetando las fronteras arquitectónicas definidas.
+{{end}}
+
+{{if .Conventions.Naming}}
+## Convención de Nomenclatura
+- Estándar configurado: {{.Conventions.Naming}}
+{{end}}
