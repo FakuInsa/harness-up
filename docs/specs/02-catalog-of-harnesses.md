@@ -1,6 +1,6 @@
 # SPEC-002: Catálogo Exhaustivo de Arneses y Taxonomía
 
-* **Proyecto:** HarnessForge
+* **Proyecto:** HarnessUp
 * **Estado:** Propuesto (Pendiente de Aprobación)
 * **Fecha:** 2026-10-14
 * **Metodología:** Spec-Driven Development (SDD)
@@ -9,7 +9,7 @@
 
 ## 1. Definición y Propósito del Catálogo
 
-El catálogo de **HarnessForge** define los bloques modulares que el usuario puede combinar para armar el arnés de su proyecto. Cada bloque se compone de:
+El catálogo de **HarnessUp** define los bloques modulares que el usuario puede combinar para armar el arnés de su proyecto. Cada bloque se compone de:
 * Un identificador único (`ID`).
 * Nombre legible y descripción.
 * Inyecciones de reglas (prompts/guidelines para el LLM).
@@ -24,7 +24,7 @@ El catálogo de **HarnessForge** define los bloques modulares que el usuario pue
 
 | ID | Nombre | Descripción | Implementación Técnica |
 | :--- | :--- | :--- | :--- |
-| `memory-sqlite-fts5` | SQLite FTS5 (Local-First) | Base de datos local SQLite con índice de búsqueda de texto completo FTS5 para guardar decisiones, bitácora y lecciones aprendidas. | Archivo `.harness/memory.db` gestionado por HarnessForge + tool CLI de consulta rápida. |
+| `memory-sqlite-fts5` | SQLite FTS5 (Local-First) | Base de datos local SQLite con índice de búsqueda de texto completo FTS5 para guardar decisiones, bitácora y lecciones aprendidas. | Archivo `.harness/memory.db` gestionado por HarnessUp + tool CLI de consulta rápida. |
 | `memory-markdown-flat` | Flat-File Markdown | Sistema liviano de archivos Markdown estructurados (`docs/decisions/` y `docs/memory.md`). | Plantillas preconfiguradas y reglas de actualización obligatoria post-tarea. |
 | `memory-none` | Sin memoria persistente | Confía únicamente en el contexto efímero de la sesión actual. | Sin persistencia. |
 
@@ -74,7 +74,7 @@ El catálogo de **HarnessForge** define los bloques modulares que el usuario pue
 
 ### Categoría F: Arneses de Clientes de IA / Destinos (`targets`)
 
-| ID | Cliente / Herramienta | Archivos que emite HarnessForge |
+| ID | Cliente / Herramienta | Archivos que emite HarnessUp |
 | :--- | :--- | :--- |
 | `target-antigravity` | Google Antigravity | `.agent/rules/` + `skills/` + `.agent/config.json` |
 | `target-cursor` | Cursor IDE | `.cursor/rules/*.mdc` (con globs) + `.cursorrules` |

@@ -1,6 +1,6 @@
 # SPEC-001: Visión, Objetivos y Arquitectura del Sistema
 
-* **Proyecto:** HarnessForge
+* **Proyecto:** HarnessUp
 * **Estado:** Propuesto (Pendiente de Aprobación)
 * **Fecha:** 2026-10-14
 * **Metodología:** Spec-Driven Development (SDD)
@@ -17,7 +17,7 @@ Al desarrollar software con agentes de Inteligencia Artificial (Claude Code, Cur
 4. **Acoplamiento a una sola herramienta:** Cambiar de Cursor a Claude Code o Antigravity implica reescribir reglas, skills y prompts a mano.
 
 ### 1.2 La Visión
-**HarnessForge** es una herramienta de línea de comandos (CLI) en Go, interactiva y extensible, que permite a cualquier desarrollador o equipo **generar, personalizar y sincronizar arneses de ingeniería deterministas** para cualquier proyecto de software, adaptados a su stack, arquitectura y herramientas de IA preferidas.
+**HarnessUp** es una herramienta de línea de comandos (CLI) en Go, interactiva y extensible, que permite a cualquier desarrollador o equipo **generar, personalizar y sincronizar arneses de ingeniería deterministas** para cualquier proyecto de software, adaptados a su stack, arquitectura y herramientas de IA preferidas.
 
 ---
 
@@ -29,11 +29,11 @@ Al desarrollar software con agentes de Inteligencia Artificial (Claude Code, Cur
 * **Auto-Detección Inteligente:** Analizar los archivos del repositorio (`package.json`, `*.csproj`, `go.mod`, `pyproject.toml`) para sugerir respuestas por defecto en el asistente.
 * **Emisión Multi-Agente:** Generar la configuración en los formatos nativos correspondientes (`.agent/rules/`, `.cursor/rules/`, `CLAUDE.md`, `.windsurfrules`, `.opencode/`, etc.).
 * **Memoria Persistente Integrada:** Proporcionar una base de datos local SQLite con FTS5 para retener decisiones y arquitectura.
-* **Idempotencia y Sincronización:** Capacidad de actualizar o regenerar arneses (`harnessforge sync`) sin sobreescribir personalizaciones del usuario.
+* **Idempotencia y Sincronización:** Capacidad de actualizar o regenerar arneses (`harnessup sync`) sin sobreescribir personalizaciones del usuario.
 
 ### 2.2 Fuera de Alcance (Out-of-Scope)
-* HarnessForge **no** es un modelo de lenguaje ni un LLM propietario.
-* HarnessForge **no** reemplaza al IDE ni al cliente de IA; provee el arnés que los gobierna.
+* HarnessUp **no** es un modelo de lenguaje ni un LLM propietario.
+* HarnessUp **no** reemplaza al IDE ni al cliente de IA; provee el arnés que los gobierna.
 
 ---
 
@@ -44,7 +44,7 @@ El proyecto seguirá la estructura idiomática de Go (`Standard Go Project Layou
 ```text
 HarnessCraft/
 ├── cmd/
-│   └── harnessforge/                # Punto de entrada principal (main.go)
+│   └── harnessup/                   # Punto de entrada principal (main.go)
 ├── internal/
 │   ├── app/                         # Orquestación de comandos Cobra (init, sync, doctor)
 │   ├── wizard/                      # Motor interactivo Bubbletea (TUI)
@@ -70,13 +70,13 @@ HarnessCraft/
 
 ---
 
-## 4. Ciclo de Vida de Ejecución (`harnessforge init`)
+## 4. Ciclo de Vida de Ejecución (`harnessup init`)
 
 ```mermaid
 flowchart TD
-    A["Ejecutar 'harnessforge init'"] --> B["Detector: Escanea archivos del repositorio"]
+    A["Ejecutar 'harnessup init'"] --> B["Detector: Escanea archivos del repositorio"]
     B --> C["Wizard TUI (Bubbletea): Presenta preguntas con defaults detectados"]
-    C --> D["Recolección de Respuestas: Genera Configuración (harnessforge.yaml)"]
+    C --> D["Recolección de Respuestas: Genera Configuración (harnessup.yaml)"]
     D --> E["Engine: Carga plantillas desde assets embebidos (embed.FS)"]
     E --> F["Emitter: Genera y fusiona archivos (.agent, .cursor, CLAUDE.md, skills/)"]
     F --> G["Memory Init: Inicializa SQLite FTS5 local para memoria del proyecto"]

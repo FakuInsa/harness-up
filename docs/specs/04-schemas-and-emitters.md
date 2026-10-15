@@ -1,15 +1,15 @@
 # SPEC-004: Esquemas de Datos, Motor de Plantillas y Emisión
 
-* **Proyecto:** HarnessForge
+* **Proyecto:** HarnessUp
 * **Estado:** Propuesto (Pendiente de Aprobación)
 * **Fecha:** 2026-10-14
 * **Metodología:** Spec-Driven Development (SDD)
 
 ---
 
-## 1. Esquema de Configuración del Proyecto (`harnessforge.yaml`)
+## 1. Esquema de Configuración del Proyecto (`harnessup.yaml`)
 
-El resultado del wizard o la ejecución manual se guarda en la raíz del proyecto en un archivo declarativo `harnessforge.yaml`:
+El resultado del wizard o la ejecución manual se guarda en la raíz del proyecto en un archivo declarativo `harnessup.yaml`:
 
 ```yaml
 version: "1.0"
@@ -70,7 +70,7 @@ var AssetFS embed.FS
 ### 2.2 Motor de Renderizado (`engine.Renderer`)
 Utiliza `text/template` de Go con funciones auxiliares personalizadas:
 * `toLower`, `toUpper`, `camelCase`, `pascalCase`, `snakeCase`.
-* Inclusión condicional de bloques basada en los flags de `harnessforge.yaml`.
+* Inclusión condicional de bloques basada en los flags de `harnessup.yaml`.
 
 ---
 
@@ -113,14 +113,14 @@ type Emitter interface {
 
 ## 4. Estrategia de Idempotencia y Fusión (File Merge)
 
-Para permitir que el usuario personalice sus reglas sin que `harnessforge sync` borre sus cambios:
+Para permitir que el usuario personalice sus reglas sin que `harnessup sync` borre sus cambios:
 1. **Zonas protegidas por etiquetas:** Los archivos generados contendrán delimitadores:
    ```markdown
-   <!-- HARNESSFORGE:MANAGED_START -->
-   ... Reglas administradas automáticamente por HarnessForge ...
-   <!-- HARNESSFORGE:MANAGED_END -->
+   <!-- HARNESSUP:MANAGED_START -->
+   ... Reglas administradas automáticamente por HarnessUp ...
+   <!-- HARNESSUP:MANAGED_END -->
 
-   <!-- HARNESSFORGE:CUSTOM_USER_RULES -->
+   <!-- HARNESSUP:CUSTOM_USER_RULES -->
    ... Cualquier regla que el usuario agregue aquí nunca será sobreescrita ...
    ```
 2. Si un archivo ya existe y no tiene etiquetas, se genera una copia de respaldo `.bak` antes de fusionar.

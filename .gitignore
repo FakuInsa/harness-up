@@ -70,3 +70,9 @@ skills/generated/
 # ==========================================
 .DS_Store
 Thumbs.db
+
+# ==========================================
+# Prompts Locales de Sesión
+# ==========================================
+SESSION_PROMPT.md
+.session_prompt.md

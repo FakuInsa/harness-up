@@ -65,14 +65,28 @@ Una tarea solo se considera completa cuando:
 
 ---
 
-## 4. Política de Commits (Work-Units Atómicas)
+## 4. Política de Ramas (Branches) y Commits (Work-Units Atómicas)
 
-* **Formato:** Conventional Commits en minúsculas:
-  * `feat(catalog): agregar adaptador de arquitectura vertical-slice`
-  * `test(wizard): validar navegación por teclado en paso 2`
-  * `fix(emitter): corregir ruta de salida para reglas de cursor`
-  * `docs(sdd): agregar spec de persistencia fts5`
+### 4.1 Estrategia de Ramas (Git Branching Model)
+* **Rama Principal (`main`):** Siempre estable, con código verificado al 100% que cumple el DoD.
+* **Rama por Feature (`feat/<id>-<nombre-kebab>`):**
+  * Toda feature del roadmap se desarrolla en su propia rama aislada a partir de `main` (ej. `feat/feat-001-stack-detector`, `feat/feat-002-config-model`).
+  * **Ciclo de vida de la rama:**
+    1. **Apertura:** Al aprobarse la especificación (Fase 2: GATE), se crea y activa la rama:
+       ```bash
+       git checkout -b feat/<id>-<nombre-kebab>
+       ```
+    2. **Desarrollo:** Las fases RED (tests), GREEN (código) y refactor se commitean exclusivamente en esta rama.
+    3. **Integración:** Tras presentar el recibo de evidencia (Fase 5) y recibir la aprobación final del Tech Lead, la rama se fusiona a `main` y se actualiza el roadmap a `[✓] DONE`.
+
+### 4.2 Política de Commits
+* **Formato:** Conventional Commits en minúsculas en **inglés técnico estándar**:
+  * `feat(catalog): add vertical-slice architecture adapter`
+  * `test(wizard): validate keyboard navigation on step 2`
+  * `fix(emitter): correct output path for cursor rules`
+  * `docs(sdd): add fts5 persistence specification`
 * **Límite de tamaño:** Ninguna unidad de trabajo debe superar las **300 líneas de diff** (sin contar archivos autogenerados o tests extensos de fixtures).
+* **Prevención de Commit Bloat en Metadatos (ADR-005):** Prohibido crear micro-commits dedicados únicamente a cambiar estados en markdown (`[ ]` -> `[⏳]` -> `[✓]`, o marcas de Gate). Cada feature debe tener como máximo 2 commits atómicos: (1) `docs(specs): add specification for feat-xxx` y (2) `feat(xxx): implement <feature>` (incluyendo tests, código y actualización a DONE).
 * **Autonomía controlada:** El agente puede proponer el commit y el mensaje, pero el control final de push/merge lo retiene el humano.
 
 ---
