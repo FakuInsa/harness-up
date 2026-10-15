@@ -11,7 +11,7 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 
 ### Feature 1: Scaffolding Base & Detector de Stack
 * **ID:** `FEAT-001`
-* **Estado:** `[ ] TO DO`
+* **Estado:** `[✓] DONE`
 * **Objetivo:** Inicializar el módulo Go y construir el componente `internal/detector` que escanea el directorio para reconocer el lenguaje (C#, TypeScript, Python, Go) y test runner existente.
 * **Criterio de Aceptación:**
   * Tests unitarios (`detector_test.go`) con fixtures simulados de cada stack.
@@ -19,10 +19,10 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 
 ---
 
-### Feature 2: Modelo de Configuración & Serialización (`harnessforge.yaml`)
+### Feature 2: Modelo de Configuración & Serialización (`harnessup.yaml`)
 * **ID:** `FEAT-002`
-* **Estado:** `[ ] TO DO`
-* **Objetivo:** Definir los structs de Go para la configuración del arnés y programar la lectura, escritura y validación del archivo `harnessforge.yaml`.
+* **Estado:** `[✓] DONE`
+* **Objetivo:** Definir los structs de Go para la configuración del arnés y programar la lectura, escritura y validación del archivo `harnessup.yaml`.
 * **Criterio de Aceptación:**
   * Tests unitarios validando carga y guardado idempotente sin pérdida de datos.
   * Rechazo con error claro ante configuraciones inválidas.
@@ -31,7 +31,7 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 
 ### Feature 3: Motor de Plantillas y Assets Embebidos (`embed.FS`)
 * **ID:** `FEAT-003`
-* **Estado:** `[ ] TO DO`
+* **Estado:** `[✓] DONE`
 * **Objetivo:** Empaquetar las primeras plantillas de reglas (`rules/`) y skills (`skills/`) dentro del binario Go con `//go:embed` y crear el motor de compilación `internal/engine`.
 * **Criterio de Aceptación:**
   * Renderizado exitoso de variables (`{{.Project.Name}}`, `{{.Architecture}}`).
@@ -41,20 +41,21 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 
 ### Feature 4: Emisores de Archivos (Antigravity & Cursor)
 * **ID:** `FEAT-004`
-* **Estado:** `[ ] TO DO`
+* **Estado:** `[✓] DONE`
 * **Objetivo:** Programar los adaptadores emisores que toman la configuración y generan físicamente los archivos `.agent/rules/`, `.cursor/rules/*.mdc` y carpetas de skills con etiquetas de fusión protegidas.
 * **Criterio de Aceptación:**
   * Tests verificando creación de archivos en directorio temporal.
-  * Respeto a las zonas `<!-- HARNESSFORGE:CUSTOM_USER_RULES -->` sin sobreescribir código del usuario.
+  * Respeto a las zonas `<!-- HARNESSUP:CUSTOM_USER_RULES -->` sin sobreescribir código del usuario.
 
 ---
 
 ### Feature 5: Wizard Interactivo TUI (Bubbletea + Lipgloss)
 * **ID:** `FEAT-005`
-* **Estado:** `[ ] TO DO`
-* **Objetivo:** Construir la máquina de estados interactiva en consola (selección de agente, arquitectura, metodología y convenciones con flechas y checkboxes).
+* **Estado:** `[✓] DONE`
+* **Objetivo:** Construir la máquina de estados interactiva en consola con soporte dual: modo **Brownfield** (detección de proyectos existentes) y modo **Greenfield** (asistente de stack, framework, arquitecturas híbridas y convenciones para carpetas vacías o proyectos nuevos).
 * **Criterio de Aceptación:**
   * Navegación fluida por teclado sin cuelgues.
+  * Bifurcación automática a selección de stack si el detector retorna `unknown` o si se pasa `--new`.
   * Generación del objeto `Config` resultante al presionar Enter en el último paso.
 
 ---
@@ -62,7 +63,7 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 ### Feature 6: CLI & Comandos Cobra (`init`, `sync`, `doctor`)
 * **ID:** `FEAT-006`
 * **Estado:** `[ ] TO DO`
-* **Objetivo:** Conectar el Wizard y los Emisores al comando principal `harnessforge init` y añadir flags para modo no interactivo (`--non-interactive`).
+* **Objetivo:** Conectar el Wizard y los Emisores al comando principal `harnessup init` y añadir flags para modo no interactivo (`--non-interactive`).
 * **Criterio de Aceptación:**
   * Ejecutable de consola probado de punta a punta.
 
@@ -74,3 +75,15 @@ No se inicia una feature hasta que la anterior esté en **[✓] DONE** y aprobad
 * **Objetivo:** Crear la base de datos local `.harness/memory.db`, tabla FTS5 de decisiones, e interfaz CLI para guardar y consultar memoria técnica.
 * **Criterio de Aceptación:**
   * Consultas de búsqueda de texto completo con tiempos de respuesta menores a 5 ms.
+
+---
+
+## Columna: Backlog Futuro (Post-v1 / Scaffolding de Código)
+
+### Feature 8: Generador de Proyecto y Código Esqueleto (Project Scaffolder)
+* **ID:** `FEAT-008`
+* **Estado:** `[ ] BACKLOG (Fuera de Scope Inicial)`
+* **Objetivo:** Permitir que HarnessUp no solo instale el arnés del agente de IA, sino que inicialice el proyecto de código fuente físicamente según las especificaciones acordadas (ej. ejecutar `dotnet new`, crear carpetas `src/Domain`, `src/Application`, estructuras en `snake_case`, e instalar paquetes base de testing).
+* **Criterio de Aceptación:**
+  * Integración opcional tras la configuración del arnés (`harnessup init --scaffold-code` o prompt interactivo).
+  * Creación limpia del código esqueleto sin interferir con las reglas del arnés.
